@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>ケア記録アプリ</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <section>
+        <h1>👤 利用者管理</h1>
+        <input id="name" placeholder="名前" />
+        <input id="age" type="number" placeholder="年齢" />
+        <button onclick="addResident()">利用者追加</button>
+    </section>
+
+    <section>
+        <h2>👥 職員管理</h2>
+        <input id="new-staff" placeholder="職員名を追加" />
+        <button onclick="addStaff()">職員追加</button>
+    </section>
+
+    <section>
+        <h2>📋 利用者一覧</h2>
+        <div id="resident-list"></div>
+    </section>
+
+    <div id="record-section" style="display:none;">
+        <h2>📝 記録一覧と追加</h2>
+        <select id="resident-select"></select>
+
+        <div id="category-filter">
+            <button onclick="setCategory('meal')">🍽️ 食事</button>
+            <button onclick="setCategory('water')">💧 水分</button>
+            <button onclick="setCategory('vital')">🩺 バイタル</button>
+            <button onclick="setCategory('case')">📄 ケース</button>
+        </div>
+
+        <div id="record-list"></div>
+
+        <button onclick="toggleForm()">＋記録追加</button>
+        <div id="record-form" style="display:none;">
+            <h3>新規記録</h3>
+            <select id="record-type" onchange="renderFormFields()">
+                <option value="meal">食事</option>
+                <option value="water">水分</option>
+                <option value="vital">バイタル</option>
+                <option value="case">ケース</option>
+            </select>
+
+            <div id="form-fields"></div>
+            <button onclick="saveNewRecord()">保存</button>
+        </div>
+
+        <button onclick="goHome()">← 戻る</button>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

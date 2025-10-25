@@ -1,0 +1,145 @@
+body {
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+input,
+select,
+textarea,
+button {
+    margin: 5px 0;
+    padding: 5px;
+    width: 100%;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.card input,
+.card select,
+.card textarea {
+    width: 90%;
+    margin-top: 5px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+#category-filter {
+    margin: 10px 0;
+}
+
+#category-filter button {
+    margin-right: 5px;
+}
+
+.edit-form label {
+  display: block;
+  margin-top: 12px;
+  /*font-weight: bold;*/
+}
+
+.edit-form input,
+.edit-form select,
+.edit-form textarea {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+}
+
+section {
+  background-color: #f9f9f9;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.card p strong {
+  color: #333;
+  font-size: 16px;
+}
+
+.card p {
+  margin-bottom: 8px;
+}
+
+label {
+  margin-top: 10px;
+  font-weight: bold;
+  display: block;
+}
+
+input, select, textarea {
+  margin-bottom: 15px;
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+.record-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 8px;
+  border-bottom: 1px solid #ddd;
+  
+  background-color: #fff;
+}
+
+.record-meta {
+  flex: 1;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.record-data {
+  flex: 2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 10px;
+}
+
+.record-actions {
+  flex-shrink: 0;
+}
+
+.record-actions button {
+  margin-left: 4px;
+  padding: 2px 6px;
+  font-size: 13px;
+}
