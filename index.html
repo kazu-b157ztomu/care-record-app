@@ -8,53 +8,68 @@
 </head>
 
 <body>
-    <section>
-        <h1>👤 利用者管理</h1>
-        <input id="name" placeholder="名前" />
-        <input id="age" type="number" placeholder="年齢" />
-        <button onclick="addResident()">利用者追加</button>
-    </section>
+    <div id="layout">
 
-    <section>
-        <h2>👥 職員管理</h2>
-        <input id="new-staff" placeholder="職員名を追加" />
-        <button onclick="addStaff()">職員追加</button>
-    </section>
+        <!-- 左カラム：利用者一覧 -->
+        <div id="left-panel">
+            <section>
+                <h1>👤 利用者管理</h1>
+                <input id="name" placeholder="名前" />
+                <input id="age" type="number" placeholder="年齢" />
+                <button onclick="addResident()">利用者追加</button>
+            </section>
 
-    <section>
-        <h2>📋 利用者一覧</h2>
-        <div id="resident-list"></div>
-    </section>
+            <section>
+                <h2>👥 職員管理</h2>
+                <input id="new-staff" placeholder="職員名を追加" />
+                <button onclick="addStaff()">職員追加</button>
+            </section>
 
-    <div id="record-section" style="display:none;">
-        <h2>📝 記録一覧と追加</h2>
-        <select id="resident-select"></select>
-
-        <div id="category-filter">
-            <button onclick="setCategory('meal')">🍽️ 食事</button>
-            <button onclick="setCategory('water')">💧 水分</button>
-            <button onclick="setCategory('vital')">🩺 バイタル</button>
-            <button onclick="setCategory('case')">📄 ケース</button>
+            <section>
+                <h2>📋 利用者一覧</h2>
+                <div id="resident-list"></div>
+            </section>
         </div>
 
-        <div id="record-list"></div>
+        <!-- 右カラム：記録一覧 -->
+        <div id="right-panel">
+            <div id="record-section">
+                <h2>📝 記録一覧と追加</h2>
 
-        <button onclick="toggleForm()">＋記録追加</button>
-        <div id="record-form" style="display:none;">
-            <h3>新規記録</h3>
-            <select id="record-type" onchange="renderFormFields()">
-                <option value="meal">食事</option>
-                <option value="water">水分</option>
-                <option value="vital">バイタル</option>
-                <option value="case">ケース</option>
-            </select>
+                <!-- <select id="resident-select"></select> -->
 
-            <div id="form-fields"></div>
-            <button onclick="saveNewRecord()">保存</button>
+                <div id="category-filter">
+                    <button onclick="setCategory('meal')">🍽️ 食事</button>
+                    <button onclick="setCategory('water')">💧 水分</button>
+                    <button onclick="setCategory('vital')">🩺 バイタル</button>
+                    <button onclick="setCategory('case')">📄 ケース</button>
+                </div>
+
+                <!-- ここだけスクロールする領域 -->
+                <div id="record-scroll-area">
+                    <div id="record-list"></div>
+
+                    <!-- 新規記録フォームは右パネル内に表示 -->
+                    <button onclick="toggleForm()">＋記録追加</button>
+                    <div id="record-form" style="display:none;">
+                        <h3>新規記録</h3>
+                        <select id="record-type" onchange="renderFormFields()">
+                            <option value="meal">食事</option>
+                            <option value="water">水分</option>
+                            <option value="vital">バイタル</option>
+                            <option value="case">ケース</option>
+                        </select>
+
+                        <div id="form-fields"></div>
+                        <button onclick="saveNewRecord()">保存</button>
+                        <button onClick="cancelForm()" id="cancelForm" style="display: none;">キャンセル</button>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <button onclick="goHome()">← 戻る</button>
     </div>
+
+
 
     <script src="app.js"></script>
 </body>

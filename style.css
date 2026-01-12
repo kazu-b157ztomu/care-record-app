@@ -1,46 +1,75 @@
 body {
-    font-family: sans-serif;
-    padding: 20px;
+  font-family: sans-serif;
+  padding: 20px;
 }
 
 input,
 select,
 textarea,
 button {
-    margin: 5px 0;
-    padding: 5px;
-    width: 100%;
+  margin: 5px 0;
+  padding: 5px;
+  width: 100%;
 }
 
 .card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 6px;
 }
 
 .card input,
 .card select,
 .card textarea {
-    width: 90%;
-    margin-top: 5px;
+  width: 90%;
+  margin-top: 5px;
 }
 
 button {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .hidden {
-    display: none;
+  display: none;
 }
 
+/* タブ全体のレイアウト */
 #category-filter {
-    margin: 10px 0;
+  display: flex;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 10px;
+  position: sticky;
+  top: 0;
+  background: #fff;
+  z-index: 10;
 }
 
+/* タブボタン */
 #category-filter button {
-    margin-right: 5px;
+  flex: 1;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 15px;
+  cursor: pointer;
+  color: #555;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
 }
+
+/* ホバー時 */
+#category-filter button:hover {
+  background-color: #f0f0f0;
+}
+
+/* 選択中のタブ */
+#category-filter button.active {
+  color: #007bff;
+  font-weight: bold;
+  border-bottom: 3px solid #007bff;
+}
+
 
 .edit-form label {
   display: block;
@@ -58,10 +87,10 @@ button {
 
 section {
   background-color: #f9f9f9;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 button {
@@ -93,7 +122,9 @@ label {
   display: block;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   margin-bottom: 15px;
 }
 
@@ -114,7 +145,7 @@ input, select, textarea {
   align-items: center;
   padding: 6px 8px;
   border-bottom: 1px solid #ddd;
-  
+
   background-color: #fff;
 }
 
@@ -142,4 +173,62 @@ input, select, textarea {
   margin-left: 4px;
   padding: 2px 6px;
   font-size: 13px;
+}
+
+/* 画面全体を2カラムにする */
+#layout {
+  display: flex;
+  height: 100vh;
+  /* 画面全体を固定 */
+  overflow: hidden;
+}
+
+/* 左パネル（利用者一覧） */
+#left-panel {
+  width: 35%;
+  min-width: 300px;
+  border-right: 1px solid #ccc;
+  overflow-y: auto;
+  padding: 10px;
+  background: #fafafa;
+}
+
+/* 右パネル（記録一覧） */
+#right-panel {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 20px;
+  background: #fff;
+}
+
+
+
+#record-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+#record-form {
+  margin-top: 10px;
+  padding: 10px;
+  background: #eef5ff;
+  border-radius: 6px;
+}
+
+/* スクロールバーを細くして見た目をスッキリ */
+#left-panel::-webkit-scrollbar,
+#right-panel::-webkit-scrollbar {
+  width: 6px;
+}
+
+#left-panel::-webkit-scrollbar-thumb,
+#right-panel::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+
+.card.active {
+  border: 2px solid #007bff;
+  background-color: #eaf3ff;
 }

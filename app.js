@@ -8,6 +8,12 @@ let currentCategory = 'meal'; // 初期値
 function setCategory(type) {
     currentCategory = type;
     filterRecords(type);
+    // タブの active 切り替え
+    document.querySelectorAll('#category-filter button').forEach(btn => {
+        btn.classList.remove('active');
+    });
+    document.querySelector(`#category-filter button[onclick="setCategory('${type}')"]`)
+        .classList.add('active');
 }
 
 const typeLabels = {
@@ -76,6 +82,7 @@ function renderResidents() {
     getResidents().forEach(r => {
         const div = document.createElement('div');
         div.className = 'card';
+        div.setAttribute('data-id', r.id);
         div.innerHTML = `<p>${r.name}（${r.age}歳）</p>
       <button onclick="openResident('${r.id}')">記録を見る・追加する</button>`;
         list.appendChild(div);
@@ -85,9 +92,18 @@ function renderResidents() {
 // 利用者選択時の画面切り替え
 function openResident(id) {
     currentResidentId = id;
+    // ① すべてのカードから active を外す
+    document.querySelectorAll('#resident-list .card').forEach(card => {
+        card.classList.remove('active');
+    });
+    // ② 選択されたカードに active を付ける
+    const selectedCard = document.querySelector(`#resident-list .card[data-id="${id}"]`);
+    if (selectedCard) {
+        selectedCard.classList.add('active');
+    }
     document.getElementById('record-section').style.display = 'block';
-    document.getElementById('resident-list').style.display = 'none';
-    const select = document.getElementById('resident-select');
+    /*document.getElementById('resident-list').style.display = 'none';
+    const select = document.getElementById('resident-list');
     select.innerHTML = '';
     getResidents().forEach(r => {
         const opt = document.createElement('option');
@@ -95,15 +111,15 @@ function openResident(id) {
         opt.textContent = r.name;
         if (r.id === id) opt.selected = true;
         select.appendChild(opt);
-    });
-    filterRecords('meal'); // 初期表示は食事
+    });*/
+    filterRecords(currentCategory); // 初期表示は食事
 }
 
-document.getElementById('resident-select').addEventListener('change', function (e) {
+/*document.getElementById('resident-select').addEventListener('change', function (e) {
     const selectedId = e.target.value;
     currentResidentId = selectedId;
     filterRecords(currentCategory);
-});
+});*/
 
 // 戻るボタン
 function goHome() {
@@ -152,6 +168,7 @@ function renderStaffSelect(id) {
 // カテゴリ別記録表示
 function filterRecords(type) {
     const records = getRecords().filter(r => r.resident_id === currentResidentId && r.type === type);
+    records.sort((a, b) => new Date(a.date) - new Date(b.date));
     const list = document.getElementById('record-list');
     list.innerHTML = '';
 
@@ -297,6 +314,7 @@ function saveEditedRecord(id) {
 
 // 新規記録フォームの内容生成
 function renderFormFields() {
+    document.getElementById('record-type').value = currentCategory;
     const type = document.getElementById('record-type').value;
     const container = document.getElementById('form-fields');
     container.innerHTML = '';
@@ -342,13 +360,15 @@ function renderFormFields() {
     if (dateField) {
         dateField.value = new Date().toISOString().split('T')[0];
     }
+    const form = document.getElementById('cancelForm');
+    form.style.display = 'block';
 }
 
 // 新規記録保存
 function saveNewRecord() {
     const type = document.getElementById('record-type').value;
     const id = Date.now().toString();
-    const resident_id = document.getElementById('resident-select').value;
+    const resident_id = currentResidentId;
     const dateInput = document.getElementById('record-date').value;
     let date = dateInput;
     if (type === 'vital' || type === 'case') {
@@ -383,4 +403,9 @@ function saveNewRecord() {
 
     document.getElementById('record-form').style.display = 'none';
     filterRecords(type);
+}
+
+function cancelForm() {
+    const form = document.getElementById('record-form');
+    form.style.display = 'none';
 }
